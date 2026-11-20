@@ -1,0 +1,37 @@
+@model MpcFabricsTracker.Models.TrackerEntry
+@{
+    ViewData["Title"] = "Tracker Details";
+}
+
+<div class="page-header">
+    <h1>Tracker Details</h1>
+</div>
+
+<div class="card-panel">
+    <dl class="row mb-0">
+        <dt class="col-sm-3">Week</dt>
+        <dd class="col-sm-9">@Model.Week?.Label</dd>
+        <dt class="col-sm-3">Date</dt>
+        <dd class="col-sm-9">@Model.WorkDate.ToString("dd-MM-yyyy") (@Model.DayName)</dd>
+        <dt class="col-sm-3">Developer</dt>
+        <dd class="col-sm-9">@Model.Developer?.Name</dd>
+        <dt class="col-sm-3">Dashboard / Task</dt>
+        <dd class="col-sm-9">@Model.DashboardTask</dd>
+        <dt class="col-sm-3">Activity</dt>
+        <dd class="col-sm-9">@Model.DayWiseActivity</dd>
+        <dt class="col-sm-3">Planned Hours</dt>
+        <dd class="col-sm-9">@Model.PlannedHours</dd>
+        <dt class="col-sm-3">Spend Hours</dt>
+        <dd class="col-sm-9">@Model.SpendHours</dd>
+        <dt class="col-sm-3">% Completed</dt>
+        <dd class="col-sm-9">@((Model.PercentCompleted * 100).ToString("0"))%</dd>
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9"><span class="status-pill status-@Model.Status.Replace(" ", "").ToLowerInvariant()">@Model.Status</span></dd>
+        <dt class="col-sm-3">Remarks</dt>
+        <dd class="col-sm-9">@(Model.Remarks ?? "—")</dd>
+    </dl>
+    <div class="mt-4 d-flex gap-2">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+    </div>
+</div>

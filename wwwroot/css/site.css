@@ -1,0 +1,148 @@
+:root {
+  --ink: #1c2430;
+  --muted: #5b6777;
+  --line: #d7dde6;
+  --surface: rgba(255, 255, 255, 0.88);
+  --brand: #0f6a5a;
+  --brand-dark: #0a4f43;
+  --accent: #c46b2d;
+  --bg1: #e8f0ec;
+  --bg2: #f4efe6;
+  --good: #1f7a4d;
+  --mid: #9a6b16;
+  --low: #9a3b2f;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(15, 106, 90, 0.12), transparent 40%),
+    radial-gradient(circle at top right, rgba(196, 107, 45, 0.12), transparent 35%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  min-height: 100vh;
+}
+
+h1, .navbar-brand {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.app-nav {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+
+.navbar-brand {
+  color: var(--brand) !important;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  color: var(--muted) !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--brand) !important;
+}
+
+.app-main {
+  padding-bottom: 3rem;
+}
+
+.page-header {
+  margin-bottom: 1.25rem;
+}
+
+.page-header h1 {
+  margin: 0.15rem 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--ink);
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+}
+
+.card-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 10px 30px rgba(28, 36, 48, 0.05);
+}
+
+.form-panel {
+  max-width: 860px;
+}
+
+.filter-bar {
+  margin-bottom: 0.5rem;
+}
+
+.table thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom-width: 1px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+.btn-primary:hover {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+
+.status-pill,
+.metric-badge {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-completed { background: #e5f6ec; color: var(--good); }
+.status-inprogress { background: #fff4df; color: var(--mid); }
+.status-notstarted { background: #f4f6f8; color: var(--muted); }
+
+.metric-badge.good { background: #e5f6ec; color: var(--good); }
+.metric-badge.mid { background: #fff4df; color: var(--mid); }
+.metric-badge.low { background: #fdecea; color: var(--low); }
+
+.app-footer {
+  border-top: 1px solid var(--line);
+  padding: 1rem 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .summary-table {
+    font-size: 0.9rem;
+  }
+}

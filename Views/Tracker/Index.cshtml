@@ -1,0 +1,92 @@
+@model MpcFabricsTracker.Models.ViewModels.TrackerIndexViewModel
+@{
+    ViewData["Title"] = "Tracker";
+}
+
+<div class="page-header d-flex flex-wrap justify-content-between align-items-start gap-3">
+    <div>
+        <p class="eyebrow">Source of truth</p>
+        <h1>Tracker</h1>
+        <p class="subtitle">Day-wise developer tasks. Summary metrics are calculated from this list.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create">Add task</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<form method="get" class="filter-bar card-panel">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Week</label>
+            <select asp-for="WeekNumber" asp-items="Model.Weeks" class="form-select" name="weekNumber">
+                <option value="">All weeks</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Developer</label>
+            <select asp-for="DeveloperId" asp-items="Model.Developers" class="form-select" name="developerId">
+                <option value="">All developers</option>
+            </select>
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Reset</a>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive card-panel mt-3">
+    <table class="table table-hover align-middle mb-0">
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Developer</th>
+                <th>Dashboard / Task</th>
+                <th>Activity</th>
+                <th class="text-end">Planned</th>
+                <th class="text-end">Spent</th>
+                <th class="text-end">% Done</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Entries.Any())
+        {
+            <tr>
+                <td colspan="11" class="text-center text-muted py-4">No tracker entries yet. Add next week’s tasks here.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model.Entries)
+            {
+                <tr>
+                    <td>@item.Week?.Label</td>
+                    <td>@item.WorkDate.ToString("dd-MM-yyyy")</td>
+                    <td>@item.DayName</td>
+                    <td>@item.Developer?.Name</td>
+                    <td>@item.DashboardTask</td>
+                    <td>@item.DayWiseActivity</td>
+                    <td class="text-end">@item.PlannedHours.ToString("0.##")</td>
+                    <td class="text-end">@item.SpendHours.ToString("0.##")</td>
+                    <td class="text-end">@((item.PercentCompleted * 100).ToString("0"))%</td>
+                    <td>
+                        <span class="status-pill status-@item.Status.Replace(" ", "").ToLowerInvariant()">@item.Status</span>
+                    </td>
+                    <td class="text-end text-nowrap">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">View</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

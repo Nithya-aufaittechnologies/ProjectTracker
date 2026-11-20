@@ -1,0 +1,49 @@
+@model MpcFabricsTracker.Models.TrackerEntry
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="WeekId" class="form-label"></label>
+        <select asp-for="WeekId" class="form-select" asp-items="ViewBag.WeekId"></select>
+        <span asp-validation-for="WeekId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="DeveloperId" class="form-label"></label>
+        <select asp-for="DeveloperId" class="form-select" asp-items="ViewBag.DeveloperId"></select>
+        <span asp-validation-for="DeveloperId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="WorkDate" class="form-label"></label>
+        <input asp-for="WorkDate" class="form-control" type="date" />
+        <span asp-validation-for="WorkDate" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="DashboardTask" class="form-label"></label>
+        <input asp-for="DashboardTask" class="form-control" />
+        <span asp-validation-for="DashboardTask" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="DayWiseActivity" class="form-label"></label>
+        <input asp-for="DayWiseActivity" class="form-control" />
+        <span asp-validation-for="DayWiseActivity" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="PlannedHours" class="form-label"></label>
+        <input asp-for="PlannedHours" class="form-control" />
+        <span asp-validation-for="PlannedHours" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="SpendHours" class="form-label"></label>
+        <input asp-for="SpendHours" class="form-control" />
+        <span asp-validation-for="SpendHours" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="PercentCompleted" class="form-label"></label>
+        <input asp-for="PercentCompleted" class="form-control" step="0.1" min="0" max="1" />
+        <div class="form-text">Use 0 to 1 (e.g. 0.5 = 50%, 1 = Completed)</div>
+        <span asp-validation-for="PercentCompleted" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Remarks" class="form-label"></label>
+        <textarea asp-for="Remarks" class="form-control" rows="2"></textarea>
+    </div>
+</div>

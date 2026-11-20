@@ -1,0 +1,90 @@
+@model MpcFabricsTracker.Models.ViewModels.SummaryPageViewModel
+@{
+    ViewData["Title"] = "Summary Dashboard";
+}
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">MPC Fabrics</p>
+        <h1>Summary Dashboard</h1>
+        <p class="subtitle">Spent hours, completed tasks, and productivity — calculated from Tracker.</p>
+    </div>
+</div>
+
+<form method="get" class="filter-bar card-panel">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Week</label>
+            <select asp-items="ViewBag.WeekNumber" name="weekNumber" class="form-select">
+                <option value="">All weeks</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Developer</label>
+            <select asp-items="ViewBag.DeveloperId" name="developerId" class="form-select">
+                <option value="">All developers</option>
+            </select>
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Apply</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Reset</a>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive card-panel mt-3">
+    <table class="table table-hover align-middle summary-table mb-0">
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Week Start</th>
+                <th>Developer</th>
+                <th class="text-end">Planned Hrs</th>
+                <th class="text-end">Leave Hrs</th>
+                <th class="text-end">Capacity</th>
+                <th class="text-end">Assigned Hrs</th>
+                <th class="text-end">Spent Hrs</th>
+                <th class="text-end">Tasks Assigned</th>
+                <th class="text-end">Completed Task</th>
+                <th class="text-end">Productivity %</th>
+                <th class="text-end">Utilization %</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Rows.Any())
+        {
+            <tr>
+                <td colspan="12" class="text-center text-muted py-4">No summary rows for the selected filters.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var row in Model.Rows)
+            {
+                <tr>
+                    <td>@row.WeekLabel</td>
+                    <td>@row.WeekStart.ToString("dd-MM-yyyy")</td>
+                    <td><strong>@row.DeveloperName</strong></td>
+                    <td class="text-end">@row.PlannedHours.ToString("0.##")</td>
+                    <td class="text-end">@row.PlannedLeaveHours.ToString("0.##")</td>
+                    <td class="text-end">@row.ActualCapacity.ToString("0.##")</td>
+                    <td class="text-end">@row.AssignedHours.ToString("0.##")</td>
+                    <td class="text-end">@row.SpentHours.ToString("0.##")</td>
+                    <td class="text-end">@row.TotalTaskAssigned</td>
+                    <td class="text-end fw-semibold">@row.CompletedTask</td>
+                    <td class="text-end">
+                        <span class="badge metric-badge @(row.ProductivityPercent >= 80 ? "good" : row.ProductivityPercent >= 50 ? "mid" : "low")">
+                            @row.ProductivityPercent.ToString("0.#")%
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <span class="badge metric-badge @(row.UtilizationPercent >= 80 ? "good" : row.UtilizationPercent >= 50 ? "mid" : "low")">
+                            @row.UtilizationPercent.ToString("0.#")%
+                        </span>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

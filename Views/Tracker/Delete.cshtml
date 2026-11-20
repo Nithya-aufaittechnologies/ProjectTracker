@@ -1,0 +1,19 @@
+@model MpcFabricsTracker.Models.TrackerEntry
+@{
+    ViewData["Title"] = "Delete Tracker Entry";
+}
+
+<div class="page-header">
+    <h1>Delete Tracker Entry</h1>
+    <p class="subtitle text-danger">This cannot be undone.</p>
+</div>
+
+<div class="card-panel">
+    <p><strong>@Model.DashboardTask</strong> — @Model.Developer?.Name on @Model.WorkDate.ToString("dd-MM-yyyy")</p>
+    <p>@Model.DayWiseActivity</p>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>

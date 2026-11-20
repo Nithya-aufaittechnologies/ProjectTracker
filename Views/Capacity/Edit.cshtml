@@ -1,0 +1,39 @@
+@model MpcFabricsTracker.Models.WeeklyCapacity
+@{
+    ViewData["Title"] = "Edit Capacity";
+}
+
+<div class="page-header">
+    <h1>Edit Capacity</h1>
+    <p class="subtitle">@Model.Developer?.Name — @Model.Week?.Label</p>
+</div>
+
+<div class="card-panel form-panel">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="WeekId" />
+        <input type="hidden" asp-for="DeveloperId" />
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="PlannedHours" class="form-label"></label>
+                <input asp-for="PlannedHours" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PlannedLeaveHours" class="form-label"></label>
+                <input asp-for="PlannedLeaveHours" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="AssignedHours" class="form-label"></label>
+                <input asp-for="AssignedHours" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TotalTaskAssigned" class="form-label"></label>
+                <input asp-for="TotalTaskAssigned" class="form-control" />
+            </div>
+        </div>
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
